@@ -108,11 +108,10 @@ Example Mapping: `8080:80` → Host 8080 maps to Container 80.
 - **Registry:** A storage location for Docker images (e.g., Docker Hub, private registry).  
 - **Repository:** A collection of different versions of an image inside a registry.
 
+
 ## Dockerfile
+A Dockerfile defines how to build a custom image
 
-A Dockerfile defines how to build a custom image. Example for a Node.js application:
-
-```dockerfile
 FROM node:14
 WORKDIR /app
 COPY . .
@@ -120,4 +119,17 @@ RUN npm install
 CMD ["node", "app.js"]
 
 
+##  Node.js Application with Docker
+Build the Image
+docker build -t my-node-app .
 
+##  Run the Container
+docker run -p 3000:3000 my-node-app
+
+##  Build Images
+Use the docker build command to create an image from a Dockerfile.
+Example:
+docker build -t my-app .
+
+
+Link to Refer:- https://www.youtube.com/watch?v=pg19Z8LL06w
