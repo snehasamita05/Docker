@@ -1,197 +1,120 @@
-Introduction
+# Docker Course Learnings
 
 I recently completed a Docker course and have compiled my learnings in this repository. This includes fundamental concepts, benefits, commands, and practical implementations that I explored during the course. Below are the key topics I covered, which provide a structured overview of Docker's role in modern software development.
 
-Table of Contents
+## Table of Contents
+
+1. [Benefits of Docker](#benefits-of-docker)
+2. [Development Process with Containers](#development-process-with-containers)
+3. [Difference Between Docker and Virtual Machine](#difference-between-docker-and-virtual-machine)
+4. [Docker Images](#docker-images)
+5. [Docker Containers](#docker-containers)
+6. [Docker Registry](#docker-registry)
+7. [Docker Hub](#docker-hub)
+8. [Docker Commands](#docker-commands)
+9. [Port Binding](#port-binding)
+10. [Container Port vs Host Port](#container-port-vs-host-port)
+11. [Private Docker Registry Examples](#private-docker-registry-examples)
+12. [Registry vs Repository](#registry-vs-repository)
+13. [Dockerfile](#dockerfile)
+14. [Node.js Application with Docker](#nodejs-application-with-docker)
+15. [Build Images](#build-images)
 
-Benefits of Docker
+## Benefits of Docker
 
-Development Process with Containers
+- Provides consistency across different environments (development, testing, production).
+- Reduces dependency conflicts and "works on my machine" issues.
+- Enables efficient resource utilization compared to traditional virtual machines.
+- Speeds up application deployment with containerization.
+- Supports microservices architecture with isolated containers.
 
-Difference Between Docker and Virtual Machine
+## Development Process with Containers
 
-Docker Images
+1. Developers write code and package it into a Docker container.
+2. The container is tested in a local or shared development environment.
+3. The tested container is pushed to a registry (e.g., Docker Hub, private registry).
+4. CI/CD pipelines deploy the container to staging/production environments.
 
-Docker Containers
+## Difference Between Docker and Virtual Machine
 
-Docker Registry
+| Feature              | Virtual Machine            | Docker                      |
+|----------------------|----------------------------|-----------------------------|
+| **Resource Usage**    | Heavy (requires full OS)   | Lightweight (shares OS kernel) |
+| **Boot Time**         | Slow                       | Fast                        |
+| **Isolation**         | Full OS virtualization      | Process-level isolation     |
+| **Portability**       | Limited                    | High                        |
 
-Docker Hub
+## Docker Images
 
-Docker Commands
+A Docker image is a blueprint containing the application and dependencies.  
+- Images are reusable and can be version-controlled.
 
-Port Binding
+## Docker Containers
 
-Container Port vs Host Port
+A container is a running instance of a Docker image.  
+- Containers can be started, stopped, and removed without affecting the image.
 
-Private Docker Registry Examples
+## Docker Registry
 
-Registry vs Repository
+A storage and distribution system for Docker images.  
+- Public registries include Docker Hub, AWS ECR, and Azure Container Registry.  
+- Private registries can be hosted on a local or cloud server.
 
-Dockerfile
+## Docker Hub
 
-Node.js Application with Docker
+The default public registry for Docker images.  
+- Provides a vast collection of pre-built images.
 
-Build Images
+## Docker Commands
 
-Benefits of Docker
+- **Pull an Image**  
+  `docker pull ubuntu`
+  
+- **Run a Container**  
+  `docker run -it ubuntu bash`
+  
+- **List Running Containers**  
+  `docker ps`
+  
+- **List All Containers**  
+  `docker ps -a`
+  
+- **Remove a Container**  
+  `docker rm container_id`
 
-Provides consistency across different environments (development, testing, production).
+## Port Binding
 
-Reduces dependency conflicts and "works on my machine" issues.
+Allows external access to a containerized application.  
+Example:  
+`docker run -p 8080:80 nginx`
 
-Enables efficient resource utilization compared to traditional virtual machines.
+## Container Port vs Host Port
 
-Speeds up application deployment with containerization.
+- **Container Port:** The port inside the container where the application runs.  
+- **Host Port:** The port on the host machine mapped to the container port.  
+Example Mapping: `8080:80` → Host 8080 maps to Container 80.
 
-Supports microservices architecture with isolated containers.
+## Private Docker Registry Examples
 
-Development Process with Containers
+- **Run a Private Registry**  
+  `docker run -d -p 5000:5000 --name registry registry:2`
+  
+- **Push an Image to a Private Registry**  
+  `docker tag my-app localhost:5000/my-app`  
+  `docker push localhost:5000/my-app`
 
-Developers write code and package it into a Docker container.
+## Registry vs Repository
 
-The container is tested in a local or shared development environment.
+- **Registry:** A storage location for Docker images (e.g., Docker Hub, private registry).  
+- **Repository:** A collection of different versions of an image inside a registry.
 
-The tested container is pushed to a registry (e.g., Docker Hub, private registry).
+## Dockerfile
 
-CI/CD pipelines deploy the container to staging/production environments.
+A Dockerfile defines how to build a custom image. Example for a Node.js application:
 
-Difference Between Docker and Virtual Machine
-
-Feature
-
-Virtual Machine
-
-Docker
-
-Resource Usage
-
-Heavy (requires full OS)
-
-Lightweight (shares OS kernel)
-
-Boot Time
-
-Slow
-
-Fast
-
-Isolation
-
-Full OS virtualization
-
-Process-level isolation
-
-Portability
-
-Limited
-
-High
-
-Docker Images
-
-A Docker image is a blueprint containing the application and dependencies.
-
-Images are reusable and can be version-controlled.
-
-Docker Containers
-
-A container is a running instance of a Docker image.
-
-Containers can be started, stopped, and removed without affecting the image.
-
-Docker Registry
-
-A storage and distribution system for Docker images.
-
-Public registries include Docker Hub, AWS ECR, and Azure Container Registry.
-
-Private registries can be hosted on a local or cloud server.
-
-Docker Hub
-
-The default public registry for Docker images.
-
-Provides a vast collection of pre-built images.
-
-Docker Commands
-
-Pull an Image
-
-docker pull ubuntu
-
-Run a Container
-
-docker run -it ubuntu bash
-
-List Running Containers
-
-docker ps
-
-List All Containers
-
-docker ps -a
-
-Remove a Container
-
-docker rm container_id
-
-Port Binding
-
-Allows external access to a containerized application.
-
-Example:
-
-docker run -p 8080:80 nginx
-
-Container Port vs Host Port
-
-Container Port: The port inside the container where the application runs.
-
-Host Port: The port on the host machine mapped to the container port.
-
-Example Mapping: 8080:80 → Host 8080 maps to Container 80.
-
-Private Docker Registry Examples
-
-Run a Private Registry
-
-docker run -d -p 5000:5000 --name registry registry:2
-
-Push an Image to a Private Registry
-
-docker tag my-app localhost:5000/my-app
-docker push localhost:5000/my-app
-
-Registry vs Repository
-
-Registry: A storage location for Docker images (e.g., Docker Hub, private registry).
-
-Repository: A collection of different versions of an image inside a registry.
-
-Dockerfile
-
-A Dockerfile defines how to build a custom image.
-Example for a Node.js application:
-
+```dockerfile
 FROM node:14
 WORKDIR /app
 COPY . .
 RUN npm install
 CMD ["node", "app.js"]
-
-Node.js Application with Docker
-
-Build the Image
-
-docker build -t my-node-app .
-
-Run the Container
-
-docker run -p 3000:3000 my-node-app
-
-Build Images
-
-Use the docker build command to create an image from a Dockerfile.
-
-Example:
